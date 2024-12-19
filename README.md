@@ -1,66 +1,25 @@
-## Foundry
+# Upgradable Smart Contract: Box
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This project demonstrates an upgradable smart contract using the UUPS (Universal Upgradeable Proxy Standard) pattern. The contract includes two versions:
 
-Foundry consists of:
+- **BoxV1**: Implements basic functionality to retrieve a stored value.
+- **BoxV2**: Extends functionality to allow updating the stored value.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## Features
 
-## Documentation
+- **Upgradeable Architecture**: Utilizes the UUPS proxy pattern for efficient and flexible upgrades.
+- **Versioning**: Each version includes a `version()` function to identify the current implementation version.
+- **Access Control**: Uses OpenZeppelin's `OwnableUpgradeable` to restrict sensitive operations to the contract owner.
 
-https://book.getfoundry.sh/
+## Upgrade Process
 
-## Usage
+1. Deploy the `BoxV2` implementation contract.
+2. Use the proxy contract's `upgradeTo(address newImplementation)` function to upgrade to `BoxV2`.
 
-### Build
+## Dependencies
 
-```shell
-$ forge build
-```
+This project uses the following OpenZeppelin libraries:
 
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+- `@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol`
+- `@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol`
+- `@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol`
